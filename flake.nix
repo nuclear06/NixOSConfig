@@ -54,7 +54,6 @@
         modules = [
           ./configuration.nix
           ./modules
-          inputs.agenix.nixosModules.default
           inputs.minegrub-theme.nixosModules.default
         ];
       };

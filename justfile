@@ -18,9 +18,9 @@ module:
 switch:gitupdate
 	nixos-rebuild switch --use-remote-sudo
 conf:
-	sudo nvim {{nixbase}}/configuration.nix
+	nvim {{nixbase}}/configuration.nix
 flake:
-	sudo nvim {{nixbase}}/flake.nix
+	nvim {{nixbase}}/flake.nix
 history:
   nix profile history --profile /nix/var/nix/profiles/system
 
