@@ -3,17 +3,19 @@ homepath:=nixbase / "saniter"
 
 default:
 	@just --list
+gitupdate msg="update":fmt
+	git add -u && git commit -m '{{msg}}'
 fmt:
-	sudo nix fmt
+	sudo nix fmt {{nixbase}}
 desktop dir="":
 	nvim {{homepath}}/desktop/{{dir}}/default.nix
 program dir="":
 	nvim {{homepath}}/programs/{{dir}}/default.nix
 home:
 	sudo nvim {{homepath}}/home.nix
-module :
+module:
 	sudo nvim {{nixbase}}/modules
-switch:
+switch:gitupdate
 	nixos-rebuild switch --use-remote-sudo
 conf:
 	sudo nvim {{nixbase}}/configuration.nix
@@ -38,5 +40,5 @@ debug:
 
 up:
   nix flake update 
-test:
+test:gitupdate
   nixos-rebuild test --use-remote-sudo

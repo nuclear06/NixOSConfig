@@ -37,7 +37,7 @@
     };
   };
   nix.settings = {
-	  auto-optimise-store = true;
+    auto-optimise-store = true;
     trusted-users = [ "saniter" ];
     experimental-features = [
       "nix-command"
@@ -150,7 +150,6 @@
   programs.mtr.enable = true;
 
   users.defaultUserShell = pkgs.zsh;
-
 
   programs.zsh = {
     enable = true;

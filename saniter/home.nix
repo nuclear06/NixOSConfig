@@ -69,7 +69,6 @@
     iotop # io monitoring
     iftop # network monitoring
 
-
     # system tools
     strace # system call monitoring
     ltrace # library call monitoring
