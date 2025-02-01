@@ -26,6 +26,8 @@
         sduo = "sudo";
         nv = "nvim";
         cls = "clear";
+        ld = "lazydocker";
+        lg = "lazygit";
       };
     };
   };
