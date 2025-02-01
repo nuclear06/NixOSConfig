@@ -24,7 +24,6 @@
   ];
 
   home.packages = with pkgs; [
-    fastfetch
     google-chrome
 
     # archives
@@ -45,7 +44,9 @@
     kdePackages.dolphin
     imv
     obs-studio
-
+    lazygit
+    lazydocker
+    fastfetch
     # networking tools
     mtr # A network diagnostic tool
     dnsutils # `dig` + `nslookup`
@@ -63,19 +64,16 @@
     playerctl
     showmethekey
 
-    # nix related
-
-    # productivity
+    # monitor
     btop # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
 
-    # system call monitoring
+
+    # system tools
     strace # system call monitoring
     ltrace # library call monitoring
     lsof # list open files
-
-    # system tools
     sysstat
     lm_sensors # for `sensors` command
     ethtool
