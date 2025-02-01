@@ -6,13 +6,14 @@
       enable = true;
       oh-my-zsh = {
         enable = true;
-        theme = "fox";
+        theme = "fino-time";
         plugins = [
           "git"
           "sudo"
           "eza"
           "autojump"
           "extract"
+          "dirhistory"
           "aliases"
         ];
       };
@@ -28,11 +29,8 @@
         cls = "clear";
         ld = "lazydocker";
         lg = "lazygit";
+        na = "nautilus";
       };
     };
   };
-
-  home.file.".zshrc".text = ''
-
-  '';
 }

@@ -22,13 +22,13 @@
     targets = {
       neovim.enable = false;
       waybar.enable = false;
-      hyprland.enable = false;
-      hyprlock.enable = false;
+      swaync.enable = false;
+      hyprland.enable = true;
+      hyprlock.enable = true;
     };
-
     cursor = {
-      name = "DMZ-Black";
-      size = 24;
+      name = "Vanilla-DMZ";
+      size = 32;
       package = pkgs.vanilla-dmz;
     };
 
@@ -63,9 +63,6 @@
       light = "Papirus-Light";
     };
 
-    image = pkgs.fetchurl {
-      url = "https://codeberg.org/lunik1/nixos-logo-gruvbox-wallpaper/raw/branch/master/png/gruvbox-dark-rainbow.png";
-      sha256 = "036gqhbf6s5ddgvfbgn6iqbzgizssyf7820m5815b2gd748jw8zc";
-    };
+    image = ./anime.jpg;
   };
 }

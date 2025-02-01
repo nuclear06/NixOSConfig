@@ -13,6 +13,11 @@
     ];
   };
   inputs = {
+    # private repo store agenix secret
+    mySecret = {
+      url = "git+ssh://git@github.com/nuclear06/NixSecret.git";
+      flake = false;
+    };
     anyrun = {
       url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,8 +30,11 @@
     stylix.url = "github:danth/stylix";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
-    Neve.url = "github:redyf/Neve";
     flake-utils.url = "github:numtide/flake-utils";
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";
     home-manager = {
       url = "github:nix-community/home-manager";

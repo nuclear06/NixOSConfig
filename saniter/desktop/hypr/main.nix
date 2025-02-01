@@ -1,7 +1,7 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.enable = false;
+    systemd.enable = true;
     settings = {
       env = [
         # Hint Electron apps to use Wayland
@@ -13,54 +13,51 @@
         "XDG_SCREENSHOTS_DIR,$HOME/screens"
       ];
 
-      monitor = ",1920x1080@60,auto,1";
+      monitor = ",1920x1080@100,auto,1";
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$fileManager" = "$terminal -e sh -c 'ranger'";
       "$menu" = "wofi";
 
       exec-once = [
+        "v2rayN"
         "waybar"
+        "swaync"
         "copyq --start-server"
       ];
 
       general = {
-        gaps_in = 0;
-        gaps_out = 0;
+        gaps_in = 5;
+        gaps_out = 20;
 
         border_size = 5;
 
-        "col.active_border" = "rgba(d65d0eff) rgba(98971aff) 45deg";
-        "col.inactive_border" = "rgba(3c3836ff)";
-
         resize_on_border = true;
 
-        allow_tearing = false;
-        layout = "master";
+        # https://wiki.hyprland.org/Configuring/Tearing/
+        # Screen tearing is used to reduce latency and/or jitter in games.
+        allow_tearing = true;
+        layout = "dwindle";
+        # layout = "master";
       };
 
       decoration = {
-        rounding = 0;
+        rounding = 5;
 
         active_opacity = 1.0;
-        inactive_opacity = 1.0;
+        inactive_opacity = 0.85;
 
         shadow = {
-          enabled = false;
+          enabled = true;
         };
 
         blur = {
-          enabled = false;
+          enabled = true;
         };
       };
 
       animations = {
-        enabled = false;
-      };
-
-      input = {
-        kb_layout = "us,ru,il";
-        kb_options = "grp:caps_toggle";
+        enabled = true;
       };
 
       gestures = {
@@ -71,7 +68,7 @@
 
       dwindle = {
         pseudotile = true;
-        preserve_split = true;
+        preserve_split = false;
       };
 
       master = {

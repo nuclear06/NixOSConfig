@@ -1,26 +1,28 @@
 nixbase:="/etc/nixos"
 homepath:=nixbase / "saniter"
 
+edit:
+  nvim /etc/nixos/justfile
 default:
-	@just --list
-gitupdate msg="update":fmt
-	git add -u && git commit -m '{{msg}}'
+  @just --list
+gitupdate msg="update":
+  cd {{nixbase}} && git add * ; git commit -m '{{msg}}' || true
 fmt:
-	sudo nix fmt {{nixbase}}
+  sudo nix fmt {{nixbase}}
 desktop dir="":
-	nvim {{homepath}}/desktop/{{dir}}/default.nix
+  nvim {{homepath}}/desktop/{{dir}}/default.nix
 program dir="":
-	nvim {{homepath}}/programs/{{dir}}/default.nix
+  nvim {{homepath}}/programs/{{dir}}/default.nix
 home:
-	sudo nvim {{homepath}}/home.nix
+  nvim {{homepath}}/home.nix
 module:
-	sudo nvim {{nixbase}}/modules
-switch:gitupdate
-	nixos-rebuild switch --use-remote-sudo
+  nvim {{nixbase}}/modules
+switch msg="update":fmt (gitupdate msg)
+  nh os switch {{nixbase}}
 conf:
-	nvim {{nixbase}}/configuration.nix
+  nvim {{nixbase}}/configuration.nix
 flake:
-	nvim {{nixbase}}/flake.nix
+  nvim {{nixbase}}/flake.nix
 history:
   nix profile history --profile /nix/var/nix/profiles/system
 
@@ -35,10 +37,14 @@ gc:
   # garbage collect all unused nix store entries
   sudo nix-collect-garbage --delete-old
 
-debug:
+debug:fmt gitupdate
   nixos-rebuild switch --flake . --use-remote-sudo --show-trace --verbose
 
 up:
   nix flake update 
-test:gitupdate
-  nixos-rebuild test --use-remote-sudo
+test msg="update":fmt (gitupdate msg)
+  nh os test {{nixbase}}
+update_secret msg="update":
+  cd /etc/nixos/secret && git add * && git commit -m '{{msg}}' || true
+check:fmt gitupdate
+  nix flake check

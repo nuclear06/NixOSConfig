@@ -1,24 +1,29 @@
 {
   wayland.windowManager.hyprland.settings = {
+    input = {
+      kb_options = "caps:swapescape";
+    };
     bind = [
-      "$mainMod SHIFT, Return, exec, $terminal"
-      "$mainMod SHIFT, C, killactive,"
-      "$mainMod SHIFT, Q, exit,"
-      "$mainMod,       R, exec, $fileManager"
+      "$mainMod CTRL, Return, exec, $terminal"
+      # special process for steam
+      "$mainMod CTRL,  Q, exec,$HOME/.config/scripts/hypr/CloseWindows.sh"
+      "$mainMod,       R, exec, sh -c yazi $HOME"
+      "CTRL    ,   space, exec, pkill anyrun || anyrun"
       "$mainMod,       F, togglefloating,"
-      "$mainMod,       D, exec, $menu --show drun"
-      "$mainMod,       P, pin,"
       "$mainMod,       J, togglesplit,"
-      "$mainMod,       E, exec, bemoji -cn"
-      "$mainMod,       V, exec, cliphist list | $menu --dmenu | cliphist decode | wl-copy"
-      "$mainMod,       B, exec, pkill -SIGUSR2 waybar"
-      "$mainMod SHIFT, B, exec, pkill -SIGUSR1 waybar"
-      "$mainMod,       L, exec, loginctl lock-session"
+      "$mainMod,       E, exec, nautilus"
+      "$mainMod,       V, exec, copyq toggle"
       "$mainMod,       P, exec, hyprpicker -an"
       "$mainMod,       N, exec, swaync-client -t"
-      ", Print, exec, grimblast --notify --freeze copysave area"
+      "$mainMod,       M, fullscreen, 1"
+      ", Print, exec, flameshot gui"
+      "CTRL_ALT, A, exec, flameshot gui"
 
       # Moving focus
+      "$mainMod, h, movefocus, l"
+      "$mainMod, l, movefocus, r"
+      "$mainMod, k, movefocus, u"
+      "$mainMod, j, movefocus, d"
       "$mainMod, left, movefocus, l"
       "$mainMod, right, movefocus, r"
       "$mainMod, up, movefocus, u"
@@ -29,6 +34,10 @@
       "$mainMod SHIFT, right, swapwindow, r"
       "$mainMod SHIFT, up,    swapwindow, u"
       "$mainMod SHIFT, down,  swapwindow, d"
+      "$mainMod SHIFT, h,  swapwindow, l"
+      "$mainMod SHIFT, l, swapwindow, r"
+      "$mainMod SHIFT, k,    swapwindow, u"
+      "$mainMod SHIFT, j,  swapwindow, d"
 
       # Resizeing windows                   X  Y
       "$mainMod CTRL, left,  resizeactive, -60 0"
@@ -47,6 +56,13 @@
       "$mainMod, 8, workspace, 8"
       "$mainMod, 9, workspace, 9"
       "$mainMod, 0, workspace, 10"
+      "$mainMod, 0, workspace, 10"
+      "$mainMod, Tab, workspace, +1"
+      "$mainMod_SHIFT, Tab, workspace, -1"
+      "$mainMod_CTRL, l, workspace, +1"
+      "$mainMod_CTRL, h, workspace, -1"
+      "$mainMod_CTRL, j, movetoworkspacesilent, -1"
+      "$mainMod_CTRL, k, movetoworkspacesilent, +1"
 
       # Moving windows to workspaces
       "$mainMod SHIFT, 1, movetoworkspacesilent, 1"

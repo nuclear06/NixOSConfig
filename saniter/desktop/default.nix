@@ -4,5 +4,7 @@
     ./waybar
     ./stylix
     ./anyrun
+    ./swayNC
+    ./wlogout
   ];
 }

@@ -1,12 +1,23 @@
 {
-  lib,
-  configs,
-  pkgs,
-  system,
   inputs,
+  lib,
+  config,
   ...
 }:
-
 {
-  home.packages = [ inputs.Neve.packages.${system}.default ];
+  imports = [
+    inputs.nvf.homeManagerModules.default
+    ./completion.nix
+    ./base.nix
+    ./plugins
+    ./theme.nix
+  ];
+  options.vimConf = lib.mkOption {
+    type = lib.types.attrs;
+    default = { };
+    description = "nvf settings";
+  };
+  config = {
+    programs.nvf.settings.vim = config.vimConf;
+  };
 }

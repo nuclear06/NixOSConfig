@@ -45,15 +45,26 @@
     ];
   };
 
-  networking.hostName = "BlueDeep"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking = {
+    hostName = "BlueDeep"; # Define your hostname.
+    proxy = {
+      default = "http://192.168.31.100:10808";
+      # default = "http://127.0.0.1:10808";
+      noProxy = "127.0.0.1,localhost,internal.domain";
+    };
+    # Enable networking
+    networkmanager.enable = true;
+    firewall = {
+      allowedTCPPorts = [
+        53317 # localsend
+      ];
+      allowedUDPPorts = [
+        53317 # localsend
+      ];
+    };
+  };
 
   # Configure network proxy if necessary
-  networking.proxy.default = "http://192.168.31.100:10808";
-  networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
@@ -62,48 +73,55 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "zh_CN.UTF-8";
-    LC_IDENTIFICATION = "zh_CN.UTF-8";
-    LC_MEASUREMENT = "zh_CN.UTF-8";
-    LC_MONETARY = "zh_CN.UTF-8";
-    LC_NAME = "zh_CN.UTF-8";
-    LC_NUMERIC = "zh_CN.UTF-8";
-    LC_PAPER = "zh_CN.UTF-8";
-    LC_TELEPHONE = "zh_CN.UTF-8";
-    LC_TIME = "zh_CN.UTF-8";
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
 
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
+    options = "ctrl:swapcaps";
   };
+  console.useXkbConfig = true;
 
-  # NVIDIA Configuration ###################################
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    extraPackages = with pkgs; [
-      vaapiVdpau
-      libvdpau
-      libvdpau-va-gl
-      nvidia-vaapi-driver
-      vdpauinfo
-      libva
-      libva-utils
-    ];
+  services.blueman.enable = true;
+  hardware = {
+    bluetooth.enable = true;
+
+    # NVIDIA Configuration ###################################
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        vaapiVdpau
+        libvdpau
+        libvdpau-va-gl
+        nvidia-vaapi-driver
+        vdpauinfo
+        libva
+        libva-utils
+      ];
+    };
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      open = false;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
+    };
   };
   services.xserver = {
     videoDrivers = [ "nvidia" ];
     # displayManager.gdm.enable = true;
-  };
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   security.sudo.extraConfig = ''
@@ -111,7 +129,8 @@
   '';
 
   nix.gc = {
-    automatic = true;
+    # use nh to auto gc
+    automatic = false;
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
@@ -142,50 +161,57 @@
     ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCpAkqa7zWPOLNzO4MMHO7fX5TwcgglQSP5/19YX6DMcissSPtEUXLS/xGIXbIcc5YcpJHa8PYk01Mr/7LlbYbTsKG1eT7IEPO9MS6bnc3Oz+hYM/P4o8b/1IkbpT9sGomgK92MozW9svwXFDaAV5BZwRZ0hEG9XHjPGgYFM80totVTpmNYXpsYc/5FREAANuqUYZrWaC+IvrwX6YT/a1DLGTOciEPo5BguqeSAQgMgOl2+zIeyxfLZfeYM4kA+xOouSF286KJyMfv+mlanNuBqxi9+PbZ9sje2OHjmJENqA6jt6JsT6tMpYzdOrjIlyo2M2kk6Kdh+YL7zoTuzbwfe20K8xtkmrr8hHk09+EOU/pQgROV0+v0EGOU3fJat1G9uoSG4xpYSMqTKrjhTaZCO+g326s7C/zoXx3to1Aat+J+TkiaRYsjV7ZbfkgHW/GZ48XY+p9DScaSPPcZaWG2tqHNfeHhgImsVslL1BZzrQ/4Pzft5W2Jz0rdPsoSLFas= dzj292543054@hotmail.com"
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCpAkqa7zWPOLNzO4MMHO7fX5TwcgglQSP5/19YX6DMcissSPtEUXLS/xGIXbIcc5YcpJHa8PYk01Mr/7LlbYbTsKG1eT7IEPO9MS6bnc3Oz+hYM/P4o8b/1IkbpT9sGomgK92MozW9svwXFDaAV5BZwRZ0hEG9XHjPGgYFM80totVTpmNYXpsYc/5FREAANuqUYZrWaC+IvrwX6YT/a1DLGTOciEPo5BguqeSAQgMgOl2+zIeyxfLZfeYM4kA+xOouSF286KJyMfv+mlanNuBqxi9+PbZ9sje2OHjmJENqA6jt6JsT6tMpYzdOrjIlyo2M2kk6Kdh+YL7zoTuzbwfe20K8xtkmrr8hHk09+EOU/pQgROV0+v0EGOU3fJat1G9uoSG4xpYSMqTKrjhTaZCO+g326s7C/zoXx3to1Aat+J+TkiaRYsjV7ZbfkgHW/GZ48XY+p9DScaSPPcZaWG2tqHNfeHhgImsVslL1BZzrQ/4Pzft5W2Jz0rdPsoSLFas= saniter@gov.com"
     ];
   };
 
-  environment.variables.EDITOR = "nvim"; # Some programs need SUID wrappers, can be configured further or are started in user sessions.
   programs.mtr.enable = true;
 
   users.defaultUserShell = pkgs.zsh;
 
-  programs.zsh = {
-    enable = true;
-    ohMyZsh = {
+  programs = {
+    nh = {
       enable = true;
-      theme = "fox";
-      plugins = [
-        "git"
-        "sudo"
-        "eza"
-        "autojump"
-        "extract"
-        "aliases"
-      ];
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 7d --keep 10";
+      flake = "/etc/nixos";
     };
-    autosuggestions.enable = true;
-    enableCompletion = true;
-    syntaxHighlighting.enable = true;
-    shellAliases = {
-      ju = "just";
-      ez = "eza -l";
-      sduo = "sudo";
-      nv = "nvim";
-      cls = "clear";
-      # fix alias for sudo
-      # https://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo
-      sudo = "sudo ";
+    zsh = {
+      enable = true;
+      ohMyZsh = {
+        enable = true;
+        theme = "fox";
+        plugins = [
+          "git"
+          "sudo"
+          "eza"
+          "autojump"
+          "extract"
+          "aliases"
+        ];
+      };
+      autosuggestions.enable = true;
+      enableCompletion = true;
+      syntaxHighlighting.enable = true;
+      shellAliases = {
+        ju = "just";
+        ez = "eza -l";
+        sduo = "sudo";
+        nv = "nvim";
+        cls = "clear";
+        # fix alias for sudo
+        # https://askubuntu.com/questions/22037/aliases-not-available-when-using-sudo
+        sudo = "sudo ";
+      };
+    };
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
     };
   };
   # enable Ozone Wayland support for Electron and Chromium
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-  };
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
   };
 
   # List services that you want to enable:
