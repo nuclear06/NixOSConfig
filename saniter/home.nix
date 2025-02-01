@@ -47,7 +47,6 @@
     lazygit
     lazydocker
     fastfetch
-    agenix
     # networking tools
     mtr # A network diagnostic tool
     dnsutils # `dig` + `nslookup`
