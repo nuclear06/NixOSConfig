@@ -48,7 +48,7 @@
   networking = {
     hostName = "BlueDeep"; # Define your hostname.
     proxy = {
-      # default = "http://192.168.31.100:10808";
+      default = "http://192.168.31.100:10808";
       # default = "http://127.0.0.1:10808";
       noProxy = "127.0.0.1,localhost,internal.domain";
     };
