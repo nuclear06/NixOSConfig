@@ -19,7 +19,7 @@
     shellIntegration.enableZshIntegration = true;
     themeFile = "Catppuccin-Mocha";
     font = {
-      name = lib.mkForce "JetBrainsMono Nerd Font";
+      name = lib.mkForce "FiraCode Nerd Font";
     };
 
     # consistent with other terminal emulators

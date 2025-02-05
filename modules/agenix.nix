@@ -1,7 +1,12 @@
-{ inputs, user, ... }:
+{
+  config,
+  inputs,
+  user,
+  ...
+}:
 
 let
-  mySecret = inputs.mySecret;
+  inherit (inputs) mySecret;
 in
 {
   imports = [ inputs.agenix.nixosModules.default ];

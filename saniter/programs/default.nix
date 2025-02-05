@@ -1,5 +1,7 @@
 {
   imports = [
+    ./ChinaProgram.nix
+
     ./zsh
     ./kitty
     ./nvim
@@ -9,5 +11,7 @@
     ./eza.nix
     ./git.nix
     ./bat.nix
+    ./fcitx5
+    ./ssh.nix
   ];
 }

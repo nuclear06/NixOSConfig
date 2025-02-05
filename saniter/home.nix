@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  nur,
   inputs,
   user,
   system,
@@ -53,8 +54,9 @@
       mosh
       yazi
       nautilus
-      v2rayn # proxy
+      # v2rayn # proxy
       v2raya
+      xray
       localsend
 
       imv # image browse

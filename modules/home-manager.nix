@@ -9,6 +9,7 @@
   imports = [
     inputs.home-manager.nixosModules.default
     {
+      nixpkgs.overlays = import ./overlays inputs;
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
@@ -16,7 +17,11 @@
         backupFileExtension = "backup";
         # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
         extraSpecialArgs = {
-          inherit system user inputs;
+          inherit
+            system
+            user
+            inputs
+            ;
         };
       };
     }

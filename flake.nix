@@ -28,6 +28,10 @@
       inputs.darwin.follows = "";
     };
     stylix.url = "github:danth/stylix";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     flake-utils.url = "github:numtide/flake-utils";
@@ -57,12 +61,17 @@
     {
       formatter.${system} = pkgs.nixfmt-rfc-style;
       nixosConfigurations.BlueDeep = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs user system; };
+        specialArgs = {
+          inherit
+            inputs
+            user
+            system
+            ;
+        };
         inherit system;
         modules = [
           ./configuration.nix
           ./modules
-          inputs.minegrub-theme.nixosModules.default
         ];
       };
     };

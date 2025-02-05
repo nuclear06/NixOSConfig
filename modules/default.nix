@@ -8,5 +8,7 @@
     ./agenix.nix
     ./steam.nix
     ./regreet.nix
+    ./minegrub.nix
+
   ];
 }

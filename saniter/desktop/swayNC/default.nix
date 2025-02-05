@@ -1,17 +1,13 @@
 # SwayNotificationCenter
 # https://github.com/ErikReider/SwayNotificationCenter
-{ lib, ... }:
+{ config, lib, ... }:
+let
+  themesPath = ./. + "/themes";
+in
 {
   home.file = {
-    ".config/swaync/themes" = {
-      source = ./themes;
-      recursive = true;
-    };
-
-    ".config/swaync/icons" = {
-      source = ./icons;
-      recursive = true;
-    };
+    ".config/swaync/themes".source = config.lib.file.mkOutOfStoreSymlink themesPath;
+    ".config/swaync/icons".source = ./icons;
   };
   services.swaync = {
     enable = true;

@@ -20,7 +20,7 @@
       "$menu" = "wofi";
 
       exec-once = [
-        "v2rayN"
+        "v2rayA"
         "waybar"
         "swaync"
         "copyq --start-server"
