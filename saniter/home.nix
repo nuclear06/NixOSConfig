@@ -53,7 +53,7 @@
       mosh
       yazi
       nautilus
-      v2rayn # proxy
+      # v2rayn # proxy
       v2raya
       xray
       localsend
