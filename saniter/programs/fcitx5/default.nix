@@ -5,7 +5,7 @@
     enabled = "fcitx5";
     fcitx5 = {
       addons = with pkgs; [
-        fcxit5-rime
+        fcitx5-rime
       ];
       waylandFrontend = true;
     };
