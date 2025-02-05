@@ -9,6 +9,6 @@
     ./eza.nix
     ./git.nix
     ./bat.nix
-    ./fcitx5
+    # ./fcitx5
   ];
 }
