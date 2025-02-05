@@ -55,6 +55,7 @@
       nautilus
       v2rayn # proxy
       v2raya
+      xray
       localsend
 
       imv # image browse
