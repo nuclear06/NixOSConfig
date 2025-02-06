@@ -9,6 +9,6 @@
     ./steam.nix
     ./regreet.nix
     ./minegrub.nix
-
+    ./programs.nix
   ];
 }
