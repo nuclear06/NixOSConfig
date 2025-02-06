@@ -10,15 +10,14 @@
       "$mainMod,       R, exec, sh -c yazi $HOME"
       "CTRL    ,   space, exec, pkill anyrun || anyrun"
       "$mainMod,       F, togglefloating,"
-      "$mainMod,       J, togglesplit,"
+      "CTRL_ALT,       L, togglesplit,"
       "$mainMod,       E, exec, nautilus"
       "$mainMod,       V, exec, copyq toggle"
       "$mainMod,       P, exec, hyprpicker -an"
       "$mainMod,       N, exec, swaync-client -t"
       "$mainMod,       M, fullscreen, 1"
-      ", Print, exec, flameshot gui"
-      "CTRL_ALT, A, exec, flameshot gui"
-
+      ", Print, exec, flameshot gui -r | copyq write image/png -"
+      "CTRL_ALT, A, exec, flameshot gui -r | copyq write image/png -"
       # Moving focus
       "$mainMod, h, movefocus, l"
       "$mainMod, l, movefocus, r"

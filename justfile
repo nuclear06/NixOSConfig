@@ -7,8 +7,10 @@ editignore:
   nvim /etc/nixos/.gitignore
 default:
   @just --list
-gitupdate msg="update":
+gitaddall msg="update":
   cd {{nixbase}} && git add * ; git commit -m '{{msg}}' || true
+gitupdate:
+  cd {{nixbase}} && git add * || true
 fmt:
   sudo nix fmt {{nixbase}}
 desktop dir="":
@@ -19,7 +21,7 @@ home:
   nvim {{homepath}}/home.nix
 module:
   nvim {{nixbase}}/modules
-switch :fmt 
+switch :fmt gitupdate
   nh os switch {{nixbase}}
 conf:
   nvim {{nixbase}}/configuration.nix
@@ -39,14 +41,14 @@ gc:
   # garbage collect all unused nix store entries
   sudo nix-collect-garbage --delete-old
 
-debug:fmt 
+debug:fmt gitupdate
   nixos-rebuild switch --flake . --use-remote-sudo --show-trace --verbose
 
-up:
+up:gitupdate
   nix flake update 
-test :fmt 
+test :fmt gitupdate
   nh os test {{nixbase}}
 update_secret msg="update":
   cd /etc/nixos/secret && git add * && git commit -m '{{msg}}' || true
-check:fmt 
+check:fmt gitupdate
   nix flake check

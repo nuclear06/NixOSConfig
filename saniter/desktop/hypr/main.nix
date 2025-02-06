@@ -16,14 +16,13 @@
       monitor = ",1920x1080@100,auto,1";
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
-      "$fileManager" = "$terminal -e sh -c 'ranger'";
-      "$menu" = "wofi";
 
       exec-once = [
         "v2rayA"
         "waybar"
         "swaync"
         "copyq --start-server"
+        "sh $HOME/.config/scripts/init/*"
       ];
 
       general = {
@@ -68,7 +67,7 @@
 
       dwindle = {
         pseudotile = true;
-        preserve_split = false;
+        preserve_split = true;
       };
 
       master = {

@@ -1,8 +1,6 @@
+{ config, ... }:
 {
   home.file = {
-    ".config/scripts/hypr" = {
-      source = ./hypr;
-      recursive = true;
-    };
+    ".config/scripts".source = config.lib.file.mkOutOfStoreSymlink ./.;
   };
 }

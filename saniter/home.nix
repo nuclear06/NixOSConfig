@@ -22,6 +22,7 @@
     ./desktop
     ./hooks
     ./scripts
+    ./options
   ];
   services.copyq.enable = true;
   programs = {
