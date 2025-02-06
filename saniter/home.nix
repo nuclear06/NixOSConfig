@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  nur,
   inputs,
   user,
   system,

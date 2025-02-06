@@ -3,6 +3,8 @@ homepath:=nixbase / "saniter"
 
 edit:
   nvim /etc/nixos/justfile
+editignore:
+  nvim /etc/nixos/.gitignore
 default:
   @just --list
 gitupdate msg="update":

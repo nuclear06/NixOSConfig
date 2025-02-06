@@ -6,6 +6,7 @@
     fcitx5 = {
       addons = with pkgs; [
         fcitx5-rime
+        librime-lua
       ];
       waylandFrontend = true;
     };
