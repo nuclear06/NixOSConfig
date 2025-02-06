@@ -6,8 +6,8 @@ let
 in
 {
   home.file = {
-    ".config/swaync/themes" = lib.file.mkOutOfStoreSymlink themesPath;
-    ".config/swaync/icons" = ./icons;
+    ".config/swaync/themes".source = lib.file.mkOutOfStoreSymlink themesPath;
+    ".config/swaync/icons".source = ./icons;
   };
   services.swaync = {
     enable = true;
