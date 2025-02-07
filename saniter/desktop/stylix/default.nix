@@ -18,11 +18,6 @@
       hyprland.enable = true;
       hyprlock.enable = true;
     };
-    cursor = {
-      name = "Vanilla-DMZ";
-      size = 32;
-      package = pkgs.vanilla-dmz;
-    };
 
     fonts = {
       emoji = {
@@ -48,11 +43,16 @@
       };
     };
 
+    cursor = {
+      package = pkgs.oreo-cursors-plus;
+      name = "oreo_spark_vibrant_violet_magenta_bordered_cursors";
+      size = 32;
+    };
     iconTheme = {
       enable = true;
-      package = pkgs.papirus-icon-theme;
-      dark = "Papirus-Dark";
-      light = "Papirus-Light";
+      package = pkgs.candy-icons;
+      dark = "candy-icons";
+      light = "candy-icons";
     };
 
     image = ./anime.jpg;
