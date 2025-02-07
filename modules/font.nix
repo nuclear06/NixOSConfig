@@ -26,15 +26,14 @@
       source-han-serif # 思源宋体
 
       # nerdfonts
-      # https://github.com/NixOS/nixpkgs/blob/nixos-unstable-small/pkgs/data/fonts/nerd-fonts/manifests/fonts.json
       nerd-fonts.symbols-only # symbols icon only
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
       nerd-fonts.iosevka
       nerd-fonts.geist-mono
 
-      julia-mono
       dejavu_fonts
+      lxgw-wenkai # 霞鹜文楷
     ];
 
     # user defined fonts

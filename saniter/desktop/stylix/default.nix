@@ -2,17 +2,9 @@
 {
   imports = [ inputs.stylix.homeManagerModules.stylix ];
 
-  home.packages = with pkgs; [
-    dejavu_fonts
-    nerd-fonts.jetbrains-mono
-    noto-fonts
-    noto-fonts-lgc-plus
-    texlivePackages.hebrew-fonts
-    noto-fonts-emoji
-    font-awesome
-    powerline-fonts
-    powerline-symbols
-  ];
+  # installed font define in modules/font.nix
+  # home.packages = with pkgs; [
+  # ];
 
   stylix = {
     enable = true;
@@ -64,5 +56,10 @@
     };
 
     image = ./anime.jpg;
+    imageScalingMode = "fit";
+    opacity = {
+      popups = 0.8;
+      terminal = 0.85;
+    };
   };
 }
