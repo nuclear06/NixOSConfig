@@ -43,13 +43,11 @@
       serif = [
         "LXGW WenKai"
         "Source Han Serif SC"
-        "Source Han Serif TC"
         "Noto Color Emoji"
       ];
       sansSerif = [
         "LXGW WenKai"
         "Source Han Sans SC"
-        "Source Han Sans TC"
         "Noto Color Emoji"
       ];
       monospace = [
