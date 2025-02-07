@@ -4,7 +4,7 @@
       kb_options = "caps:swapescape";
     };
     bind = [
-      "$mainMod CTRL, Return, exec, $terminal"
+      "$mainMod CTRL, Return, exec, $terminal $pwd"
       # special process for steam
       "$mainMod CTRL,  Q, exec,$HOME/.config/scripts/hypr/CloseWindows.sh"
       "$mainMod,       R, exec, sh -c yazi $HOME"
