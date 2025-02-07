@@ -1,0 +1,62 @@
+patch:
+  schema_list/schema:
+    - double_pinyin_flypy
+  menu/page_size: 8
+  switcher/fold_options: false
+  ascii_composer/switch_key:
+    Caps_Lock: clear
+    # Shift_L: noop remove Shift_L key
+    Shift_R: noop
+    Control_L: noop
+    Control_R: noop
+  recognizer/patterns:
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    underscore: "^[A-Za-z]+_.*"
+    url_2: "^[A-Za-z]+[.].*"
+    colon: "^[A-Za-z]+:.*"
+key_binder/bindings:
+  - { when: composing, accept: Shift+Tab, send: Shift+Left }
+  - { when: composing, accept: Tab, send: Shift+Right }
+
+  - { when: composing, accept: Alt+Left, send: Shift+Left }
+  - { when: composing, accept: Alt+Right, send: Shift+Right }
+
+  - { when: has_menu, accept: minus, send: Page_Up }
+  - { when: has_menu, accept: equal, send: Page_Down }
+
+  # enable 翻页 , .
+  - { when: paging, accept: comma, send: Page_Up }
+  - { when: has_menu, accept: period, send: Page_Down }
+
+  - { when: always, toggle: ascii_mode, accept: Control+space } # 切换中英
+  - { when: always, toggle: ascii_punct, accept: Control+comma } # 切换中英标点
+  - { when: always, toggle: traditionalization, accept: Control+slash } # 切换简繁
+
+  # vim style editing:
+  - { when: composing, accept: Control+k, send: Up }
+  - { when: composing, accept: Control+j, send: Down }
+  - { when: composing, accept: Control+h, send: Left }
+  - { when: composing, accept: Control+l, send: Right }
+  - { when: composing, accept: Control+i, send: Home }
+  - { when: composing, accept: Control+o, send: End }
+  - { when: composing, accept: Control+w, send: Shift+BackSpace }
+  - { when: composing, accept: Control+u, send: Page_Up }
+  - { when: composing, accept: Control+d, send: Page_Down }
+
+  # below keep default
+  - { accept: KP_0, send: 0, when: composing }
+  - { accept: KP_1, send: 1, when: composing }
+  - { accept: KP_2, send: 2, when: composing }
+  - { accept: KP_3, send: 3, when: composing }
+  - { accept: KP_4, send: 4, when: composing }
+  - { accept: KP_5, send: 5, when: composing }
+  - { accept: KP_6, send: 6, when: composing }
+  - { accept: KP_7, send: 7, when: composing }
+  - { accept: KP_8, send: 8, when: composing }
+  - { accept: KP_9, send: 9, when: composing }
+  - { accept: KP_Decimal, send: period, when: composing }
+  # 将小键盘 + - * / 映射到主键盘，使计算器 如 1+2-3*4 可使用小键盘输入
+  - { accept: KP_Multiply, send: asterisk, when: composing }
+  - { accept: KP_Add, send: plus, when: composing }
+  - { accept: KP_Subtract, send: minus, when: composing }
+  - { accept: KP_Divide, send: slash, when: composing }

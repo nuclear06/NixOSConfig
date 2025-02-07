@@ -1,4 +1,17 @@
+{ pkgs, inputs, ... }:
 {
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    curl
+    just
+    neovim
+    fd
+    eza
+    git
+    wl-clipboard
+    autojump
+  ];
   programs = {
     nh = {
       enable = true;
@@ -34,6 +47,7 @@
         sudo = "sudo ";
       };
     };
+    nix-ld.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;

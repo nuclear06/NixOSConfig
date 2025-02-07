@@ -1,12 +1,16 @@
-{ pkgs, ... }:
 {
+  pkgs,
+  ...
+}:
+{
+
   services.greetd = {
     enable = true;
     settings = {
-      default_session = {
-        command = "Hyprland --config ${./. + /hyprland.conf}";
-        user = "greeter";
-      };
+      # default session is cage
+      # use Hyprland will cause unnecessary troubles, because Hyprland require pass config file path.
+      # but the binary file path of regreet need be parsed in nix system
+      # $default_session = { "{pkgs.dbus}/bin/dbus-run-session ${lib.getExe pkgs.cage} ${lib.escapeShellArgs cfg.cageArgs} -- ${lib.getExe cfg.package}" };
     };
   };
   programs.regreet = {
@@ -22,7 +26,7 @@
 
     settings = {
       background = {
-        path = ./. + /regreet.jpg;
+        path = ./. + /regreet.png;
         fit = "Fill";
       };
     };

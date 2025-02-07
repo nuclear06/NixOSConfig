@@ -12,6 +12,7 @@
     ./plugins
     ./theme.nix
   ];
+
   options.vimConf = lib.mkOption {
     type = lib.types.attrs;
     default = { };

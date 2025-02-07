@@ -19,8 +19,8 @@
 
       exec-once = [
         "v2rayA --lite"
-        "waybar"
-        "swaync"
+        # "waybar"
+        # "swaync"
         "copyq --start-server"
         "sh $HOME/.config/scripts/init/*"
       ];

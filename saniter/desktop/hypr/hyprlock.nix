@@ -55,7 +55,7 @@
         }
         # Degrees
         {
-          text = ''cmd[update:18000000] echo "<b><big> $(curl -s 'wttr.in?format=3&m' | tr -d '+') </big></b>"'';
+          text = ''cmd[update:18000000] echo "<b><big> $(curl --noproxy '*' -s 'wttr.in?format=3&m' | tr -d '+') </big></b>"'';
           font_size = 18;
           font_family = "Geist Mono 10";
           position = "0, 40";

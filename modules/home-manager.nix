@@ -9,7 +9,6 @@
   imports = [
     inputs.home-manager.nixosModules.default
     {
-      nixpkgs.overlays = import ./overlays inputs;
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;

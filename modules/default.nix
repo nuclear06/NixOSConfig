@@ -7,8 +7,8 @@
     ./hyprland.nix
     ./agenix.nix
     ./steam.nix
-    ./regreet
     ./minegrub.nix
     ./programs.nix
+    ./regreet
   ];
 }

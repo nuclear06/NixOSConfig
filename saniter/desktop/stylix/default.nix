@@ -15,6 +15,7 @@
       neovim.enable = false;
       waybar.enable = false;
       swaync.enable = false;
+      vscode.enable = false;
       hyprland.enable = true;
       hyprlock.enable = true;
     };

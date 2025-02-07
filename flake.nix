@@ -45,6 +45,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nix-alien.url = "github:thiagokokada/nix-alien";
+
   };
 
   outputs =
@@ -61,6 +63,7 @@
     in
     {
       formatter.${system} = pkgs.nixfmt-rfc-style;
+      nixpkgs.overlays = import ./overlays inputs;
       nixosConfigurations.BlueDeep = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit
@@ -73,6 +76,7 @@
         modules = [
           ./configuration.nix
           ./modules
+          ./overlays
         ];
       };
     };

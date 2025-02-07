@@ -73,18 +73,22 @@
   time.timeZone = "Asia/Shanghai";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    supportedLocales = [
+      "en_US.UTF-8/UTF-8"
+    ];
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
   };
 
   # Configure keymap in X11
@@ -141,20 +145,6 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    curl
-    just
-    neovim
-    fd
-    python3
-    git
-    autojump
-    eza
-    wl-clipboard
-  ];
-
   users.users.saniter = {
     isNormalUser = true;
     description = "saniter";
@@ -167,8 +157,6 @@
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCpAkqa7zWPOLNzO4MMHO7fX5TwcgglQSP5/19YX6DMcissSPtEUXLS/xGIXbIcc5YcpJHa8PYk01Mr/7LlbYbTsKG1eT7IEPO9MS6bnc3Oz+hYM/P4o8b/1IkbpT9sGomgK92MozW9svwXFDaAV5BZwRZ0hEG9XHjPGgYFM80totVTpmNYXpsYc/5FREAANuqUYZrWaC+IvrwX6YT/a1DLGTOciEPo5BguqeSAQgMgOl2+zIeyxfLZfeYM4kA+xOouSF286KJyMfv+mlanNuBqxi9+PbZ9sje2OHjmJENqA6jt6JsT6tMpYzdOrjIlyo2M2kk6Kdh+YL7zoTuzbwfe20K8xtkmrr8hHk09+EOU/pQgROV0+v0EGOU3fJat1G9uoSG4xpYSMqTKrjhTaZCO+g326s7C/zoXx3to1Aat+J+TkiaRYsjV7ZbfkgHW/GZ48XY+p9DScaSPPcZaWG2tqHNfeHhgImsVslL1BZzrQ/4Pzft5W2Jz0rdPsoSLFas= saniter@gov.com"
     ];
   };
-
-  programs.mtr.enable = true;
 
   users.defaultUserShell = pkgs.zsh;
 

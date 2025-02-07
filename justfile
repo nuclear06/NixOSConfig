@@ -3,6 +3,8 @@ homepath:=nixbase / "saniter"
 
 edit:
   nvim /etc/nixos/justfile
+editreadme:
+  nvim /etc/nixos/README.md
 editignore:
   nvim /etc/nixos/.gitignore
 default:
