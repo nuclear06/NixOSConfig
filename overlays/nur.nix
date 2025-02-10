@@ -1,1 +1,1 @@
-inputs: inputs.nur.overlays.default
+args: args.inputs.nur.overlays.default

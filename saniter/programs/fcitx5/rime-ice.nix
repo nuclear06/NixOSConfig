@@ -26,8 +26,7 @@ stdenvNoCC.mkDerivation {
     cp -r ./* $out/share/rime-data
     if [[ -n "${userConfig}" ]];then
       echo "Specify user configuration path: [${userConfig}]"  
-        cp -rf ${userConfig}/* $out/share/rime-data
-      fi
+      cp -rf ${userConfig}/* $out/share/rime-data
     else
       echo "Not Specify any user configuration"
     fi

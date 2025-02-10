@@ -51,14 +51,13 @@
 
   outputs =
     inputs@{
-      self,
       nixpkgs,
-      home-manager,
       ...
     }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      nixpkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
       user = "saniter";
     in
     {
@@ -70,6 +69,7 @@
             inputs
             user
             system
+            nixpkgs-stable
             ;
         };
         inherit system;

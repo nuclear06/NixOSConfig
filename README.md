@@ -2,13 +2,17 @@
 
 - [ ] migerate config to NixCat
   - [ ] add neovim nightly overlay
-- [ ] configure Rime
-  - [ ] write Rime-ice package
+- [x] configure Rime
+  - [x] write Rime-ice package
 - [x] Configure Regeet, autologin after boot
 - [ ] change theme of swayNC
 - [ ] add custom package to NUR
 
 ### Reference
+
+#### Recommand to read
+
+- [nix.div](https://nix.dev/guides)
 
 #### how to write package?
 
@@ -18,6 +22,6 @@
 
 #### automatic package update
 
-ps: The automatic package update are not standardized yet, I'm lost in all ways.
-
 - [github issue](https://github.com/NixOS/nixpkgs/issues/295028)
+- [Nixos Wiki](https://wiki.nixos.org/wiki/Nixpkgs/Update_Scripts)
+  you can find definition of `unstableGitUpdater` and `gitUpdater` in this link.

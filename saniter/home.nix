@@ -27,6 +27,7 @@
     '';
   };
   home.stateVersion = "24.11";
+  home.shell.enableShellIntegration = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
