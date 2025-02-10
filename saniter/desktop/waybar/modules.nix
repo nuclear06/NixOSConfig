@@ -470,7 +470,7 @@
   "custom/power" = {
     format = "⏻ ";
     exec = "echo ; echo 󰟡 power // blur";
-    on-click = "wlogout";
+    on-click = "wlogout -b 5";
     interval = 86400;
     tooltip = true;
   };

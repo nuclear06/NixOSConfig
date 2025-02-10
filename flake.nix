@@ -44,37 +44,39 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    nix-alien.url = "github:thiagokokada/nix-alien";
+
   };
 
   outputs =
     inputs@{
-      self,
       nixpkgs,
-      home-manager,
-      nur,
       ...
     }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      nixpkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
       user = "saniter";
     in
     {
       formatter.${system} = pkgs.nixfmt-rfc-style;
+      nixpkgs.overlays = import ./overlays inputs;
       nixosConfigurations.BlueDeep = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit
             inputs
             user
             system
-            nur
+            nixpkgs-stable
             ;
         };
         inherit system;
         modules = [
           ./configuration.nix
           ./modules
-          inputs.minegrub-theme.nixosModules.default
+          ./overlays
         ];
       };
     };

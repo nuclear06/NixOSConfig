@@ -1,7 +1,7 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.enable = true;
+    systemd.enable = false;
     settings = {
       env = [
         # Hint Electron apps to use Wayland
@@ -16,14 +16,13 @@
       monitor = ",1920x1080@100,auto,1";
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
-      "$fileManager" = "$terminal -e sh -c 'ranger'";
-      "$menu" = "wofi";
 
       exec-once = [
-        "v2rayA"
-        "waybar"
-        "swaync"
+        "v2rayA --lite"
+        # "waybar"
+        # "swaync"
         "copyq --start-server"
+        "sh $HOME/.config/scripts/init/*"
       ];
 
       general = {
@@ -68,7 +67,7 @@
 
       dwindle = {
         pseudotile = true;
-        preserve_split = false;
+        preserve_split = true;
       };
 
       master = {

@@ -1,17 +1,6 @@
+{ lib, ... }:
 {
-  imports = [
-    ./ChinaProgram.nix
-
-    ./zsh
-    ./kitty
-    ./nvim
-    ./tmux
-    ./hardware.nix
-    ./flameshot.nix
-    ./eza.nix
-    ./git.nix
-    ./bat.nix
-    ./fcitx5
-    ./ssh.nix
-  ];
+  imports = lib.map (f: ./${f}) (
+    builtins.filter (f: f != "default.nix") (builtins.attrNames (builtins.readDir ./.))
+  );
 }

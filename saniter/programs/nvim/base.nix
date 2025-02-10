@@ -4,6 +4,10 @@
 }:
 
 {
+  programs.neovim = {
+    vimdiffAlias = true;
+    defaultEditor = true;
+  };
   programs.nvf = {
     enableManpages = true;
     enable = true;

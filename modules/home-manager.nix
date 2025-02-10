@@ -2,7 +2,7 @@
   inputs,
   user,
   system,
-  nur,
+  nixpkgs-stable,
   ...
 }:
 
@@ -21,7 +21,7 @@
             system
             user
             inputs
-            nur
+            nixpkgs-stable
             ;
         };
       };

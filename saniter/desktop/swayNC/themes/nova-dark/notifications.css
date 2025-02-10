@@ -1,5 +1,5 @@
 @define-color text            #b5afbc;
-@define-color background-alt  alpha(#A54634;, .4);
+@define-color background-alt  alpha(#A54634, .4);
 @define-color selected        #E29466;
 @define-color hover           alpha(@selected, .4);
 @define-color urgent          #A04B38;

@@ -3,12 +3,16 @@ homepath:=nixbase / "saniter"
 
 edit:
   nvim /etc/nixos/justfile
+editreadme:
+  nvim /etc/nixos/README.md
 editignore:
   nvim /etc/nixos/.gitignore
 default:
   @just --list
-gitupdate msg="update":
+gitaddall msg="update":
   cd {{nixbase}} && git add * ; git commit -m '{{msg}}' || true
+gitupdate:
+  cd {{nixbase}} && git add * || true
 fmt:
   sudo nix fmt {{nixbase}}
 desktop dir="":
@@ -19,7 +23,7 @@ home:
   nvim {{homepath}}/home.nix
 module:
   nvim {{nixbase}}/modules
-switch msg="update":fmt (gitupdate msg)
+switch :fmt gitupdate
   nh os switch {{nixbase}}
 conf:
   nvim {{nixbase}}/configuration.nix
@@ -42,9 +46,9 @@ gc:
 debug:fmt gitupdate
   nixos-rebuild switch --flake . --use-remote-sudo --show-trace --verbose
 
-up:
+up:gitupdate
   nix flake update 
-test msg="update":fmt (gitupdate msg)
+test :fmt gitupdate
   nh os test {{nixbase}}
 update_secret msg="update":
   cd /etc/nixos/secret && git add * && git commit -m '{{msg}}' || true

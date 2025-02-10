@@ -26,15 +26,14 @@
       source-han-serif # 思源宋体
 
       # nerdfonts
-      # https://github.com/NixOS/nixpkgs/blob/nixos-unstable-small/pkgs/data/fonts/nerd-fonts/manifests/fonts.json
       nerd-fonts.symbols-only # symbols icon only
       nerd-fonts.fira-code
       nerd-fonts.jetbrains-mono
       nerd-fonts.iosevka
       nerd-fonts.geist-mono
 
-      julia-mono
       dejavu_fonts
+      lxgw-wenkai # 霞鹜文楷
     ];
 
     # user defined fonts
@@ -42,18 +41,19 @@
     # B&W emojis that would sometimes show instead of some Color emojis
     fontconfig.defaultFonts = {
       serif = [
+        "LXGW WenKai"
         "Source Han Serif SC"
-        "Source Han Serif TC"
         "Noto Color Emoji"
       ];
       sansSerif = [
+        "LXGW WenKai"
         "Source Han Sans SC"
-        "Source Han Sans TC"
         "Noto Color Emoji"
       ];
       monospace = [
         "JetBrainsMono Nerd Font"
         "Noto Color Emoji"
+        "LXGW WenKai Mono"
       ];
       emoji = [ "Noto Color Emoji" ];
     };
