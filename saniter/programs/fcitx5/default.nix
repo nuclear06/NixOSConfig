@@ -1,16 +1,21 @@
 {
   pkgs,
-  lib,
-  config,
   ...
 }:
+let
+  rime-ice = pkgs.callPackage ./rime-ice.nix {
+    userConfig = ./patch;
+  };
+in
 {
   # install rime-ice config
   home.packages = [
-    (pkgs.callPackage ./rime-ice.nix {
-      userConfig = ./patch;
-    })
+    rime-ice
   ];
+  home.file.".local/share/fcitx5/rime" = {
+    source = "${rime-ice}/share/rime-data";
+    recursive = true;
+  };
 
   # use fcitx5 on wayland
   # https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland

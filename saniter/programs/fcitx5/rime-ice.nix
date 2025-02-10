@@ -24,9 +24,10 @@ stdenvNoCC.mkDerivation {
     rm -rf ./.github
     rm squirrel.yaml weasel.yaml
     cp -r ./* $out/share/rime-data
-    if [[ -n ${userConfig} ]];then
+    if [[ -n "${userConfig}" ]];then
       echo "Specify user configuration path: [${userConfig}]"  
-      cp -rf ${userConfig}/* $out/share/rime-data
+        cp -rf ${userConfig}/* $out/share/rime-data
+      fi
     else
       echo "Not Specify any user configuration"
     fi
