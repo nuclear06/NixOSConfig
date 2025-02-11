@@ -5,5 +5,6 @@
     ./hyprlock.nix
     ./hyprpaper.nix
     ./main.nix
+    ./rule.nix
   ];
 }

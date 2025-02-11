@@ -1,6 +1,6 @@
 {
   lib,
-  pkgs,
+  config,
   ...
 }:
 ###########################################################
@@ -19,7 +19,7 @@
     shellIntegration.enableZshIntegration = true;
     themeFile = "Catppuccin-Mocha";
     font = {
-      name = lib.mkForce "FiraCode Nerd Font";
+      name = lib.mkForce config.stylix.fonts.monospace.name;
     };
 
     # consistent with other terminal emulators

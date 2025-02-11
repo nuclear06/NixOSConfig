@@ -23,7 +23,6 @@
     fzf # A command-line fuzzy finder
     file
     mosh
-    yazi
     nautilus
     w3m # web browser in console
     v2raya

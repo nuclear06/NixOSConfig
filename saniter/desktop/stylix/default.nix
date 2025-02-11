@@ -26,7 +26,7 @@
         package = pkgs.noto-fonts-color-emoji;
       };
       monospace = {
-        name = "JetBrains Mono";
+        name = "JetBrains Mono Nerd Font";
         package = pkgs.nerd-fonts.jetbrains-mono;
       };
       sansSerif = {
