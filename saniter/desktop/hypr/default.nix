@@ -6,5 +6,6 @@
     ./hyprpaper.nix
     ./main.nix
     ./rule.nix
+    ./hyprswitch.nix
   ];
 }

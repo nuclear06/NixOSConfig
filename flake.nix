@@ -18,6 +18,7 @@
       url = "git+ssh://git@github.com/nuclear06/NixSecret.git";
       flake = false;
     };
+    hyprswitch.url = "github:h3rmt/hyprswitch/release";
     anyrun = {
       url = "github:anyrun-org/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";

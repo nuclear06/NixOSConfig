@@ -23,6 +23,7 @@
         # "swaync"
         "copyq --start-server"
         "sh $HOME/.config/scripts/init/*"
+        "hyprswitch init --show-title --size-factor 4.5 --workspaces-per-row 6 &"
       ];
 
       general = {

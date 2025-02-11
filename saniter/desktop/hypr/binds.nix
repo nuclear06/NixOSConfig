@@ -78,6 +78,10 @@
       # Scratchpad
       "$mainMod,       S, togglespecialworkspace,  magic"
       "$mainMod SHIFT, S, movetoworkspace, special:magic"
+
+      # hyprswitch
+      "alt, tab, exec, hyprswitch gui --mod-key alt_l --key tab --close mod-key-release --reverse-key=key=grave --switch-type=workspace && hyprswitch dispatch"
+      "alt, grave, exec, hyprswitch gui --mod-key alt_l --key tab --close mod-key-release --reverse-key=key=grave --switch-type=workspace && hyprswitch dispatch -r"
     ];
 
     # Move/resize windows with mainMod + LMB/RMB and dragging
