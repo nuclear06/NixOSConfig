@@ -29,6 +29,7 @@
     xray
     localsend
 
+    hyprpicker
     imv # image browse
     obs-studio
     lazygit
@@ -56,7 +57,6 @@
     gnupg
     brightnessctl
     playerctl
-    showmethekey
 
     # monitor
     btop # replacement of htop/nmon
@@ -73,8 +73,5 @@
     pciutils # lspci
     usbutils # lsusb
 
-    # WM stuff
-    libsForQt5.xwaylandvideobridge
-    hyprpicker
   ];
 }
