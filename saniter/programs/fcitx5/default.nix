@@ -4,14 +4,17 @@
   ...
 }:
 let
-  inherit (myNUR) rime-ice;
+  rime-ice = myNUR.rime-ice.override {
+    userConfig = ./patch;
+  };
 in
 {
   # install rime-ice config ##########
   home.packages = [
     rime-ice
   ];
-  home.file.".local/share/fcitx5/rime" = {
+  # default to ~/.local/share
+  xdg.dataFile."fcitx5/rime" = {
     source = "${rime-ice}/share/rime-data";
     recursive = true;
   };
