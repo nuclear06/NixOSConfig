@@ -58,6 +58,7 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       nixpkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
+      myNUR = inputs.nur.legacyPackages.${system}.repos.nuclear06;
       user = "saniter";
     in
     {
@@ -70,6 +71,7 @@
             user
             system
             nixpkgs-stable
+            myNUR
             ;
         };
         inherit system;

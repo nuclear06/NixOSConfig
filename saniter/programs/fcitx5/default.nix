@@ -1,14 +1,13 @@
 {
   pkgs,
+  myNUR,
   ...
 }:
 let
-  rime-ice = pkgs.callPackage ./rime-ice.nix {
-    userConfig = ./patch;
-  };
+  inherit (myNUR) rime-ice;
 in
 {
-  # install rime-ice config
+  # install rime-ice config ##########
   home.packages = [
     rime-ice
   ];

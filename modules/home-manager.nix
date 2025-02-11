@@ -3,6 +3,7 @@
   user,
   system,
   nixpkgs-stable,
+  myNUR,
   ...
 }:
 
@@ -22,6 +23,7 @@
             user
             inputs
             nixpkgs-stable
+            myNUR
             ;
         };
       };
