@@ -42,3 +42,6 @@ Further reading:
 - [github issue](https://github.com/NixOS/nixpkgs/issues/295028)
 - [Nixos Wiki](https://wiki.nixos.org/wiki/Nixpkgs/Update_Scripts)
   you can find definition of `unstableGitUpdater` and `gitUpdater` in this link.
+
+### Credits
+- Image source: Internet / If there’s an issue, let me know.

@@ -11,7 +11,6 @@
       plugins = with inputs.anyrun.packages.${pkgs.system}; [
         applications
         randr
-        rink
         shell
         symbols
         websearch
@@ -23,7 +22,11 @@
       hidePluginInfo = true;
       closeOnClick = true;
     };
-
+    extraConfigFiles."shell.ron".text = ''
+      Config(
+        prefix: "!",
+      )
+    '';
     # custom css for anyrun, based on catppuccin-mocha
     extraCss = ''
       @define-color bg-col  rgba(30, 30, 46, 0.7);
