@@ -37,7 +37,7 @@
       "alt+h" = "kitten relative_resize.py left  3";
       "alt+l" = "kitten relative_resize.py right 3";
       "ctrl+f" =
-        "launch --type=overlay --stdin-source=@screen_scrollback /usr/local/bin/fzf --no-sort --no-mouse --exact -i --tac";
+        "launch --type=overlay --stdin-source=@screen_scrollback fzf --no-sort --no-mouse --exact -i --tac";
     };
 
     extraConfig = ''
