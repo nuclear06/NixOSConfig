@@ -13,8 +13,10 @@
       todo-comments.enable = true;
       treesitter = {
         enable = true;
-        nixGrammars = true;
+        folding = true;
+        nixGrammars = false;
         settings = {
+          auto_install = true;
           ensure_installed = "all";
           indent.enable = true;
           highlight.enable = true;

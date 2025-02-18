@@ -3,6 +3,7 @@
     plugins.which-key = {
       enable = true;
       settings = {
+        preset = "helix";
         delay = 600;
         icons = {
           breadcrumb = "»";

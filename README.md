@@ -1,15 +1,5 @@
 Sorry, I'm not FOSS enough😭.
 
-### TODO:
-
-- [ ] migerate config to NixCat
-  - [ ] add neovim nightly overlay
-- [x] configure Rime
-  - [x] write Rime-ice package
-- [x] Configure Regeet, autologin after boot
-- [ ] change theme of swayNC
-- [x] add custom package to NUR
-
 ### Reference && Q&A
 
 #### Recommand to read

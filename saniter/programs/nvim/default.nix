@@ -2,23 +2,19 @@
   inputs,
   system,
   ...
-}: {
-  imports = [
-    inputs.nixvim.homeManagerModules.nixvim
-    ./plugins/lsp.nix
-    ./plugins/tree.nix
-    ./plugins/telescope.nix
-    ./plugins/cmp.nix
-    ./plugins/ui.nix
-    ./plugins/lualine.nix
-    ./plugins/utils.nix
-    ./plugins/dashboard.nix
-    ./plugins/markdown.nix
-
-    ./options.nix
-    ./keymaps.nix
-    ./autocmds.nix
-  ];
+}: let
+  plugins =
+    builtins.map (f: ./plugins/${f})
+    (builtins.attrNames (builtins.readDir ./plugins));
+in {
+  imports =
+    [
+      inputs.nixvim.homeManagerModules.nixvim
+      ./options.nix
+      ./keymaps.nix
+      ./autocmds.nix
+    ]
+    ++ plugins;
 
   programs.nixvim = {
     package = inputs.neovim-nightly.packages.${system}.default;
