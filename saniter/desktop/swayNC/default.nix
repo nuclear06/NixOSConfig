@@ -1,10 +1,12 @@
 # SwayNotificationCenter
 # https://github.com/ErikReider/SwayNotificationCenter
-{ config, lib, ... }:
-let
-  themesPath = ./. + "/themes";
-in
 {
+  config,
+  lib,
+  ...
+}: let
+  themesPath = ./. + "/themes";
+in {
   home.file = {
     ".config/swaync/themes".source = config.lib.file.mkOutOfStoreSymlink themesPath;
     ".config/swaync/icons".source = ./icons;

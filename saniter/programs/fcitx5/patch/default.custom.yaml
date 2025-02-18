@@ -29,7 +29,7 @@ patch:
     - { when: has_menu, accept: period, send: Page_Down }
 
     - { when: always, toggle: ascii_mode, accept: Control+space } # 切换中英
-    - { when: always, toggle: ascii_punct, accept: Control+comma } # 切换中英标点
+    - { when: always, toggle: ascii_punct, accept: Control+Shift+comma } # 切换中英标点
     - { when: always, toggle: traditionalization, accept: Control+slash } # 切换简繁
 
     # vim style editing:

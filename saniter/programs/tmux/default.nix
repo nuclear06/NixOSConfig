@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   Config = pkgs.writeShellScriptBin "Config" ''
     SESSION="Nixy Config"
 
@@ -23,8 +22,7 @@ let
     tmux select-pane -t 0
     tmux attach -t "$SESSION"
   '';
-in
-{
+in {
   programs.tmux = {
     enable = true;
     mouse = true;
@@ -54,5 +52,5 @@ in
       tmuxPlugins.tokyo-night-tmux
     ];
   };
-  home.packages = [ Config ];
+  home.packages = [Config];
 }

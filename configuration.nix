@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -8,24 +10,24 @@
 
   # fix Suspend/wakeup issues
   # https://wiki.hyprland.org/Nvidia/#other-issues
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+  boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
   # Bootloader.
   boot.loader = {
-    systemd-boot.configurationLimit = 10;
+    systemd-boot.configurationLimit = 8;
     efi.canTouchEfiVariables = true;
     grub = {
       enable = true;
       # for dual system ######################
       default = "saved";
       extraEntries = ''
-        	      GRUB_SAVEDEFAULT=true
-        	      menuentry 'Windows 12' --class windows --class os {
-        		      savedefault
-        		      insmod part_gpt
-        		      insmod fat
-        		      search --no-floppy --fs-uuid --set=root 9152-8432
-        		      chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-        	      }
+        GRUB_SAVEDEFAULT=true
+        menuentry 'Windows 12' --class windows --class os {
+         savedefault
+         insmod part_gpt
+         insmod fat
+         search --no-floppy --fs-uuid --set=root 9152-8432
+         chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+        }
       '';
       useOSProber = false;
       efiSupport = true;
@@ -41,7 +43,7 @@
   };
   nix.settings = {
     auto-optimise-store = true;
-    trusted-users = [ "saniter" ];
+    trusted-users = ["saniter"];
     experimental-features = [
       "nix-command"
       "flakes"
@@ -127,7 +129,7 @@
     };
   };
   services.xserver = {
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = ["nvidia"];
     # displayManager.gdm.enable = true;
   };
 
@@ -137,7 +139,7 @@
 
   nix.gc = {
     # use nh to auto gc
-    automatic = false;
+    automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
@@ -184,5 +186,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }

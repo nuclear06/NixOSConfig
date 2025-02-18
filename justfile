@@ -1,56 +1,74 @@
-nixbase:="/etc/nixos"
-homepath:=nixbase / "saniter"
+nixbase := "/etc/nixos"
+homepath := nixbase / "saniter"
+editor := "hx"
 
 edit:
-  nvim /etc/nixos/justfile
+    {{ editor }} /etc/nixos/justfile
+
 editreadme:
-  nvim /etc/nixos/README.md
+    {{ editor }} /etc/nixos/README.md
+
 editignore:
-  nvim /etc/nixos/.gitignore
+    {{ editor }} /etc/nixos/.gitignore
+
 default:
-  @just --list
+    @just --list
+
 gitaddall msg="update":
-  cd {{nixbase}} && git add * ; git commit -m '{{msg}}' || true
+    cd {{ nixbase }} && git add * ; git commit -m '{{ msg }}' || true
+
 gitupdate:
-  cd {{nixbase}} && git add * || true
+    cd {{ nixbase }} && git add * || true
+
 fmt:
-  sudo nix fmt {{nixbase}}
+    nix fmt {{ nixbase }}
+
 desktop dir="":
-  nvim {{homepath}}/desktop/{{dir}}/default.nix
+    {{ editor }} {{ homepath }}/desktop/{{ dir }}/default.nix
+
 program dir="":
-  nvim {{homepath}}/programs/{{dir}}/default.nix
+    {{ editor }} {{ homepath }}/programs/{{ dir }}/default.nix
+
 home:
-  nvim {{homepath}}/home.nix
+    {{ editor }} {{ homepath }}/home.nix
+
 module:
-  nvim {{nixbase}}/modules
-switch :fmt gitupdate
-  nh os switch {{nixbase}}
+    {{ editor }} {{ nixbase }}/modules
+
+switch: fmt gitupdate
+    nh os switch {{ nixbase }}
+
 conf:
-  nvim {{nixbase}}/configuration.nix
+    {{ editor }} {{ nixbase }}/configuration.nix
+
 flake:
-  nvim {{nixbase}}/flake.nix
+    {{ editor }} {{ nixbase }}/flake.nix
+
 history:
-  nix profile history --profile /nix/var/nix/profiles/system
+    nix profile history --profile /nix/var/nix/profiles/system
 
 repl:
-  nix repl -f flake:nixpkgs
+    nix repl -f flake:nixpkgs
 
 clean:
-  # remove all generations older than 7 days
-  sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --older-than 7d
+    # remove all generations older than 7 days
+    sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --older-than 7d
 
 gc:
-  # garbage collect all unused nix store entries
-  sudo nix-collect-garbage --delete-old
+    # garbage collect all unused nix store entries
+    sudo nix-collect-garbage --delete-old
 
-debug:fmt gitupdate
-  nixos-rebuild switch --flake . --use-remote-sudo --show-trace --verbose
+debug: fmt gitupdate
+    nixos-rebuild switch --flake . --use-remote-sudo --show-trace --verbose
 
-up:gitupdate
-  nix flake update 
-test :fmt gitupdate
-  nh os test {{nixbase}}
+up: gitupdate
+    nix flake update 
+
+test: fmt gitupdate
+    nh os test {{ nixbase }}
+
 update_secret msg="update":
-  cd /etc/nixos/secret && git add * && git commit -m '{{msg}}' || true
-check:fmt gitupdate
-  nix flake check
+    cd /etc/nixos/secret && git add * && git commit -m '{{ msg }}' || true
+
+check: fmt gitupdate
+    nix flake check

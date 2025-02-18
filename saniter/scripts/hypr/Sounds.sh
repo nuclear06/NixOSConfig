@@ -10,24 +10,24 @@ muteScreenshots=false
 muteVolume=false
 
 # Exit if the system sounds are muted.
-if [[ "$mute" = true ]]; then
-    exit 0
+if [[ $mute == true ]]; then
+  exit 0
 fi
 
 # Choose the sound to play.
-if [[ "$1" == "--screenshot" ]]; then
-    if [[ "$muteScreenshots" = true ]]; then
-        exit 0
-    fi
-    soundoption="screen-capture.*"
-elif [[ "$1" == "--volume" ]]; then
-    if [[ "$muteVolume" = true ]]; then
-        exit 0
-    fi
-    soundoption="audio-volume-change.*"
-else
-    echo -e "Available sounds: --screenshot, --volume"
+if [[ $1 == "--screenshot" ]]; then
+  if [[ $muteScreenshots == true ]]; then
     exit 0
+  fi
+  soundoption="screen-capture.*"
+elif [[ $1 == "--volume" ]]; then
+  if [[ $muteVolume == true ]]; then
+    exit 0
+  fi
+  soundoption="audio-volume-change.*"
+else
+  echo -e "Available sounds: --screenshot, --volume"
+  exit 0
 fi
 
 # Set the directory defaults for system sounds.
@@ -38,9 +38,9 @@ defaultTheme="freedesktop"
 # Prefer the user's theme, but use the system's if it doesn't exist.
 sDIR="$systemDIR/$defaultTheme"
 if [ -d "$userDIR/$theme" ]; then
-    sDIR="$userDIR/$theme"
+  sDIR="$userDIR/$theme"
 elif [ -d "$systemDIR/$theme" ]; then
-    sDIR="$systemDIR/$theme"
+  sDIR="$systemDIR/$theme"
 fi
 
 # Get the theme that it inherits.
@@ -50,16 +50,16 @@ iDIR="$sDIR/../$iTheme"
 # Find the sound file and play it.
 sound_file=$(find $sDIR/stereo -name "$soundoption" -print -quit)
 if ! test -f "$sound_file"; then
-    sound_file=$(find $iDIR/stereo -name "$soundoption" -print -quit)
+  sound_file=$(find $iDIR/stereo -name "$soundoption" -print -quit)
+  if ! test -f "$sound_file"; then
+    sound_file=$(find $userDIR/$defaultTheme/stereo -name "$soundoption" -print -quit)
     if ! test -f "$sound_file"; then
-        sound_file=$(find $userDIR/$defaultTheme/stereo -name "$soundoption" -print -quit)
-        if ! test -f "$sound_file"; then
-            sound_file=$(find $systemDIR/$defaultTheme/stereo -name "$soundoption" -print -quit)
-            if ! test -f "$sound_file"; then
-                echo "Error: Sound file not found."
-                exit 1
-            fi
-        fi
+      sound_file=$(find $systemDIR/$defaultTheme/stereo -name "$soundoption" -print -quit)
+      if ! test -f "$sound_file"; then
+        echo "Error: Sound file not found."
+        exit 1
+      fi
     fi
+  fi
 fi
 pw-play "$sound_file"

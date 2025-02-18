@@ -5,9 +5,7 @@
   nixpkgs-stable,
   myNUR,
   ...
-}:
-
-{
+}: {
   imports = [
     inputs.home-manager.nixosModules.default
     {

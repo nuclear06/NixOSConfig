@@ -1,5 +1,4 @@
 {
-
   description = "nixos flake";
   nixConfig = {
     substituters = [
@@ -43,40 +42,45 @@
     };
     neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
     nix-alien.url = "github:thiagokokada/nix-alien";
-
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs =
-    inputs@{
-      nixpkgs,
-      ...
-    }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      nixpkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
-      myNUR = inputs.nur.legacyPackages.${system}.repos.nuclear06;
-      user = "saniter";
-    in
-    {
-      formatter.${system} = pkgs.nixfmt-rfc-style;
-      nixpkgs.overlays = import ./overlays inputs;
-      nixosConfigurations.BlueDeep = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit
-            inputs
-            user
-            system
-            nixpkgs-stable
-            myNUR
-            ;
-        };
-        inherit system;
-        modules = [
-          ./configuration.nix
-          ./modules
-          ./overlays
-        ];
+  outputs = inputs @ {
+    nixpkgs,
+    flake-utils,
+    self,
+    ...
+  }: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+    nixpkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
+    myNUR = inputs.nur.legacyPackages.${system}.repos.nuclear06;
+    user = "saniter";
+    inherit (flake-utils.lib) eachDefaultSystem;
+    treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs ./modules/treefmt.nix;
+  in {
+    formatter.${system} = treefmtEval.config.build.wrapper;
+    nixpkgs.overlays = import ./overlays inputs;
+    nixosConfigurations.BlueDeep = nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit
+          inputs
+          user
+          system
+          nixpkgs-stable
+          myNUR
+          ;
       };
+      inherit system;
+      modules = [
+        ./configuration.nix
+        ./modules
+        ./overlays
+      ];
     };
+  };
 }

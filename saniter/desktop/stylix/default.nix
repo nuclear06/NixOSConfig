@@ -1,6 +1,9 @@
-{ pkgs, inputs, ... }:
 {
-  imports = [ inputs.stylix.homeManagerModules.stylix ];
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [inputs.stylix.homeManagerModules.stylix];
 
   # installed font define in modules/font.nix
   # home.packages = with pkgs; [
@@ -18,6 +21,7 @@
       vscode.enable = false;
       hyprland.enable = true;
       hyprlock.enable = true;
+      helix.enable = false;
     };
 
     fonts = {

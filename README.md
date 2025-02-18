@@ -44,4 +44,5 @@ Further reading:
   you can find definition of `unstableGitUpdater` and `gitUpdater` in this link.
 
 ### Credits
+
 - Image source: Internet / If there’s an issue, let me know.

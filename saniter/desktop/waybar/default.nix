@@ -3,12 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   custom = import ./modules.nix;
-in
-
-{
+in {
   programs.waybar = {
     enable = true;
     systemd = {

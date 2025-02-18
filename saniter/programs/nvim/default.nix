@@ -1,242 +1,27 @@
 {
-  config,
-  lib,
-  pkgs,
   inputs,
   system,
   ...
-}:
+}: {
+  imports = [
+    inputs.nixvim.homeManagerModules.nixvim
+    ./plugins/lsp.nix
+    ./plugins/tree.nix
+    ./plugins/telescope.nix
+    ./plugins/cmp.nix
+    ./plugins/ui.nix
+    ./plugins/lualine.nix
+    ./plugins/utils.nix
+    ./plugins/dashboard.nix
+    ./plugins/markdown.nix
 
-{
-  programs.neovim = {
-    enable = true;
+    ./options.nix
+    ./keymaps.nix
+    ./autocmds.nix
+  ];
+
+  programs.nixvim = {
     package = inputs.neovim-nightly.packages.${system}.default;
-    defaultEditor = true;
-    extraConfig = ''
-      set undofile
-    '';
-    extraPackages = with pkgs; [
-      # LazyVim
-      lua-language-server
-      stylua
-      # Telescope
-      ripgrep
-      gcc
-    ];
-
-    plugins = with pkgs.vimPlugins; [
-      lazy-nvim
-    ];
-
-    extraLuaConfig =
-      let
-        plugins = with pkgs.vimPlugins; [
-          # LazyVim
-          LazyVim
-          bufferline-nvim
-          cmp-buffer
-          cmp-nvim-lsp
-          cmp-path
-          cmp_luasnip
-          conform-nvim
-          dashboard-nvim
-          dressing-nvim
-          flash-nvim
-          friendly-snippets
-          gitsigns-nvim
-          indent-blankline-nvim
-          lualine-nvim
-          neo-tree-nvim
-          neoconf-nvim
-          neodev-nvim
-          noice-nvim
-          nui-nvim
-          nvim-cmp
-          nvim-lint
-          smart-splits-nvim
-          nvim-lspconfig
-          nvim-notify
-          nvim-spectre
-          nvim-treesitter
-          nvim-treesitter-context
-          nvim-treesitter-textobjects
-          nvim-ts-autotag
-          nvim-ts-context-commentstring
-          nvim-web-devicons
-          persistence-nvim
-          plenary-nvim
-          telescope-fzf-native-nvim
-          telescope-nvim
-          todo-comments-nvim
-          tokyonight-nvim
-          trouble-nvim
-          vim-illuminate
-          vim-startuptime
-          which-key-nvim
-          {
-            name = "LuaSnip";
-            path = luasnip;
-          }
-          {
-            name = "catppuccin";
-            path = catppuccin-nvim;
-          }
-          {
-            name = "mini.ai";
-            path = mini-nvim;
-          }
-          {
-            name = "mini.bufremove";
-            path = mini-nvim;
-          }
-          {
-            name = "mini.comment";
-            path = mini-nvim;
-          }
-          {
-            name = "mini.indentscope";
-            path = mini-nvim;
-          }
-          {
-            name = "mini.pairs";
-            path = mini-nvim;
-          }
-          {
-            name = "mini.surround";
-            path = mini-nvim;
-          }
-        ];
-        mkEntryFromDrv =
-          drv:
-          if lib.isDerivation drv then
-            {
-              name = "${lib.getName drv}";
-              path = drv;
-            }
-          else
-            drv;
-        lazyPath = pkgs.linkFarm "lazy-plugins" (builtins.map mkEntryFromDrv plugins);
-      in
-      # lazy.nvim doc: https://lazy.folke.io/configuration
-      ''
-                vim.opt.runtimepath:prepend(vim.fs.joinpath(vim.fn.stdpath('data'), 'site'))
-                  require("lazy").setup({
-                    defaults = {
-                      lazy = true,
-                    },
-                    dev = {
-                      -- reuse files from pkgs.vimPlugins.*
-                      path = "${lazyPath}",
-                      patterns = { "." },
-                      -- fallback to download
-                      fallback = true,
-                    },
-                    spec = {
-                      { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-                      -- The following configs are needed for fixing lazyvim on nix
-                      -- force enable telescope-fzf-native.nvim
-                      { "nvim-telescope/telescope-fzf-native.nvim", enabled = true },
-                      -- disable mason.nvim, use programs.neovim.extraPackages
-                      { "williamboman/mason-lspconfig.nvim", enabled = false },
-                      { "williamboman/mason.nvim", enabled = false },
-                      -- import/override with your plugins
-                      { import = "plugins" },
-                      -- treesitter handled by xdg.configFile."nvim/parser", put this line at the end of spec to clear ensure_installed
-                      { "nvim-treesitter/nvim-treesitter", opts = { auto_install = true, ensure_installed = {
-                      bash,
-                      c,
-                      cmake,
-                      comment,
-                      cpp,
-                      css,
-                      csv,
-                      diff,
-                      dockerfile,
-                      dot,
-                      gitignore,
-                      go,
-                      groovy,
-                      html,
-                      ini,
-                      java,
-                      javascript,
-                      jq,
-                      json,
-                      json5,
-                      just,
-                      kotlin,
-                      latex,
-                      lua,
-                      make,
-                      nginx,
-                      nix,
-                      python,
-                      sql,
-                      tsv,
-                      toml,
-                      typescript,
-                      vim,
-                      vue,
-                      xml,
-                      yaml,
-        }, parser_install_dir = vim.fs.joinpath(vim.fn.stdpath('data'), 'site') },},
-                    },
-                  })
-      '';
+    enable = true;
   };
-
-  #  FIXME: dont find proper solution, maybe wait nvim-treesitter main branch 1.0 release
-  #  https://github.com/nvim-treesitter/nvim-treesitter/issues/6912
-  #
-  #  xdg.dataFile."nvim/site".source =
-  #    let
-  #      parsers = pkgs.symlinkJoin {
-  #        name = "treesitter-parsers";
-  #        paths =
-  #          (pkgs.vimPlugins.nvim-treesitter.withPlugins (
-  #            plugins: with plugins; [
-  #              bash
-  #              c
-  #              cmake
-  #              comment
-  #              cpp
-  #              css
-  #              csv
-  #              diff
-  #              dockerfile
-  #              dot
-  #              gitignore
-  #              go
-  #              groovy
-  #              html
-  #              ini
-  #              java
-  #              javascript
-  #              jq
-  #              json
-  #              json5
-  #              just
-  #              kotlin
-  #              latex
-  #              lua
-  #              make
-  #              nginx
-  #              nix
-  #              python
-  #              sql
-  #              tsv
-  #              toml
-  #              typescript
-  #              vim
-  #              vue
-  #              xml
-  #              yaml
-  #            ]
-  #          )).dependencies;
-  #      };
-  #    in
-  #    "${parsers}";
-
-  # Normal LazyVim config here, see https://github.com/LazyVim/starter/tree/main/lua
-  xdg.configFile."nvim/lua".source = config.lib.file.mkOutOfStoreSymlink ./lua;
 }

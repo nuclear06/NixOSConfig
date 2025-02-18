@@ -3,13 +3,10 @@
   inputs,
   user,
   ...
-}:
-
-let
+}: let
   inherit (inputs) mySecret;
-in
-{
-  imports = [ inputs.agenix.nixosModules.default ];
+in {
+  imports = [inputs.agenix.nixosModules.default];
   age = {
     identityPaths = [
       "/home/${user}/.ssh/id_rsa"

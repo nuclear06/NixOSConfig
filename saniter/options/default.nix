@@ -1,13 +1,16 @@
-{ lib, config, ... }:
-let
-  inherit (lib)
+{
+  lib,
+  config,
+  ...
+}: let
+  inherit
+    (lib)
     mkIf
     mkOption
     mkDefault
     types
     ;
-in
-{
+in {
   options = {
     nvim.nightly = mkOption {
       type = types.bool;

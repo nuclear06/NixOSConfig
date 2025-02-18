@@ -4,11 +4,9 @@
   nixpkgs-stable,
   system,
   ...
-}:
-let
+}: let
   overlays = builtins.map (
-    f:
-    (import (./. + "/${f}") {
+    f: (import (./. + "/${f}") {
       inherit
         inputs
         pkgs
@@ -17,7 +15,6 @@ let
         ;
     })
   ) (builtins.filter (f: f != "default.nix") (builtins.attrNames (builtins.readDir ./.)));
-in
-{
+in {
   nixpkgs.overlays = overlays;
 }

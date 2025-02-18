@@ -1,8 +1,4 @@
-{
-  user,
-  ...
-}:
-{
+{user, ...}: {
   imports = [
     ./programs
     ./desktop

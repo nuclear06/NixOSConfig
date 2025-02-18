@@ -14,9 +14,7 @@
         "center, class:com.github.hluk.copyq"
 
         "float,class:(mpv)|(imv)"
-
       ];
     };
   };
-
 }

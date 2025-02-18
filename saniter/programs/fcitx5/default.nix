@@ -2,13 +2,11 @@
   pkgs,
   myNUR,
   ...
-}:
-let
+}: let
   rime-ice = myNUR.rime-ice.override {
     userConfig = ./patch;
   };
-in
-{
+in {
   # install rime-ice config ##########
   home.packages = [
     rime-ice
@@ -37,7 +35,7 @@ in
     fcitx5 = {
       addons = with pkgs; [
         (fcitx5-rime.override {
-          rimeDataPkgs = [ ]; # Remove default config rime-data
+          rimeDataPkgs = []; # Remove default config rime-data
         })
         librime-lua
       ];

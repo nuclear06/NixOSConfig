@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   programs = {
     fastfetch.enable = true;
     fd.enable = true;
@@ -11,7 +9,6 @@
     python312Packages.pylatexenc
     # develop
     # nixd
-
     # archives
     zip
     xz
@@ -72,6 +69,5 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
-
   ];
 }
